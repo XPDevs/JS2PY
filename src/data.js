@@ -1,6 +1,6 @@
 function loadAndExecuteScript() {
     // Path to the .json file that actually contains JavaScript code inside it
-    const jsonFilePath = '../data/myfile.json'; // Path to the file
+    const jsonFilePath = '../data/data.json'; // Path to the file
 
     // Fetch the "JSON" file that contains JavaScript code inside it
     fetch(jsonFilePath)
