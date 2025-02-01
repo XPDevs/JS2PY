@@ -1,0 +1,78 @@
+function convertToPython() {
+        let jsCode = document.getElementById('inputJs').value;
+
+        // Handle comments - only replace // with # if not a URL
+        jsCode = jsCode.replace(/\/\/(?!https?:\/\/)(.*)/g, '#$1'); // Converts single-line comments (//) except URLs
+
+        // Handle let prompt() calls (changed to variable assignment with input())
+        jsCode = jsCode.replace(/\blet\s+(\w+)\s*=\s*prompt\((.*)\)/g, '$1 = input($2)'); // Converts let name = prompt() to name = input()
+
+        // Keywords
+        jsCode = jsCode.replace(/\bfalse\b/g, 'False');
+        jsCode = jsCode.replace(/\bnull\b/g, 'None');
+        jsCode = jsCode.replace(/\btrue\b/g, 'True');
+        jsCode = jsCode.replace(/\blet\b/g, ''); // Removed let, since Python uses just variable assignment
+        jsCode = jsCode.replace(/\bconst\b/g, ''); // Removed const, since Python has no explicit declaration
+        jsCode = jsCode.replace(/\bfunction\b/g, 'def');
+        jsCode = jsCode.replace(/\breturn\b/g, 'return');
+        jsCode = jsCode.replace(/\bif\b/g, 'if');
+        jsCode = jsCode.replace(/\belse\b/g, 'else');
+        jsCode = jsCode.replace(/\bfor\b/g, 'for');
+        jsCode = jsCode.replace(/\bwhile\b/g, 'while');
+        jsCode = jsCode.replace(/\btry\b/g, 'try');
+        jsCode = jsCode.replace(/\bcatch\b/g, 'except');
+        jsCode = jsCode.replace(/\bfinally\b/g, 'finally');
+        jsCode = jsCode.replace(/\b&&\b/g, 'and');
+        jsCode = jsCode.replace(/\|\|/g, 'or');
+
+        // Functions and Methods
+        jsCode = jsCode.replace(/\bMath\.(abs|acos|asin|atan|atan2|ceil|comb|cos|dist|exp|factorial|floor|fmod|frexp|isclose|isfinite|isinf|isnan|lcm|log|log10|log2|modf|pow|random|round|sin|sqrt|tan)\(/g, 'math.$1(');
+        jsCode = jsCode.replace(/\bMath\.pi\b/g, 'math.pi');
+
+        // OS & Path
+        jsCode = jsCode.replace(/\bprocess\.cwd\(\)/g, 'os.getcwd()');
+        jsCode = jsCode.replace(/\bfs\.unlinkSync\(/g, 'os.remove(');
+        jsCode = jsCode.replace(/\bos\.chdir\(/g, 'os.chdir(');
+        jsCode = jsCode.replace(/\bos\.path\.join\(/g, 'os.path.join(');
+        jsCode = jsCode.replace(/\bos\.path\.exists\(/g, 'os.path.exists(');
+        jsCode = jsCode.replace(/\bos\.path\.isabs\(/g, 'os.path.isabs(');
+        jsCode = jsCode.replace(/\bos\.path\.isfile\(/g, 'os.path.isfile(');
+
+        // Console with CSS (Handle '%c' for color styles in console.log)
+        jsCode = jsCode.replace(/\bconsole\.log\('%c\s*(.*?)\s*'\s*,\s*'(.*)'\)/g, 'print("\\033[38;5;$2m$1\\033[0m")'); // Converts colored log
+
+        // Console
+        jsCode = jsCode.replace(/\bconsole\.log\(/g, 'print(');
+        jsCode = jsCode.replace(/\bconsole\.error\(/g, 'print('); // Optional: for error logging
+        jsCode = jsCode.replace(/\bconsole\.warn\(/g, 'print('); // Optional: for warnings
+
+        // Arrays and Lists
+        jsCode = jsCode.replace(/\bArray\.isArray\(/g, 'isinstance');
+        jsCode = jsCode.replace(/\barray\.push\(/g, 'list.append(');
+        jsCode = jsCode.replace(/\barray\.pop\(/g, 'list.pop(');
+        jsCode = jsCode.replace(/\barray\.shift\(/g, 'list.pop(0)');
+        jsCode = jsCode.replace(/\barray\.unshift\(/g, 'list.insert(0, ');
+
+        // Strings
+        jsCode = jsCode.replace(/\bString\.fromCharCode\(/g, 'chr(');
+        jsCode = jsCode.replace(/\bString\.charAt\(/g, 'str.__getitem__(');
+        jsCode = jsCode.replace(/\bstring\.split\(/g, 'str.split(');
+        jsCode = jsCode.replace(/\bstring\.toUpperCase\(/g, 'str.upper(');
+        jsCode = jsCode.replace(/\bstring\.toLowerCase\(/g, 'str.lower(');
+
+        // Mathematical operators (fix for JS variable assignments and operations)
+        jsCode = jsCode.replace(/(\d+|\w+)\s*=\s*(\d+|\w+)/g, '$1 = $2'); // Fix assignment
+        jsCode = jsCode.replace(/(\d+|\w+)\s*([+\-*/%])\s*(\d+|\w+)/g, '$1 $2 $3'); // Keep the math operations
+
+        // Remove semicolons from Python code
+        jsCode = jsCode.replace(/;/g, '');
+
+        // Remove extra space from the first line
+        jsCode = jsCode.trimStart();
+
+        // Handle parseFloat issue by replacing with float() conversion
+        jsCode = jsCode.replace(/\bparseFloat\((.*)\)/g, 'float($1)');
+
+        // Output the converted Python code
+        document.getElementById('output').textContent = jsCode;
+    }
