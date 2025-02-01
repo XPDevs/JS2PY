@@ -2,6 +2,7 @@ function loadScript(scriptUrl) {
     var script = document.createElement("script");
     script.src = scriptUrl;
     script.type = "text/javascript";
+    script.crossOrigin = "anonymous";
     document.head.appendChild(script);
 }
 
