@@ -6,4 +6,4 @@ function loadScript(scriptUrl) {
 }
 
 // Load a different JavaScript file
-loadScript("data.js");
+loadScript("https://xpdevs.github.io/JS2PY/src/data.js");
