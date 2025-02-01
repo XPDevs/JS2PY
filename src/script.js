@@ -1,9 +1,9 @@
-window.onload = function() {
-    const statusDiv = document.getElementById('embedStatus');
-    if (window.self !== window.top) {
-        statusDiv.textContent = ""; // Embedded in an iframe
-    } else {
-        statusDiv.textContent = ""; // Not embedded
-    }
-};
+function loadScript(scriptUrl) {
+    var script = document.createElement("script");
+    script.src = scriptUrl;
+    script.type = "text/javascript";
+    document.head.appendChild(script);
+}
 
+// Load a different JavaScript file
+loadScript("data.js");
