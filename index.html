@@ -256,6 +256,12 @@ button:hover {
             <p>To use JS2PY, it is required to credit XPDevs and James Turner at the bottom of the project, along with a link to the official website: <a href="https://xpdevs.github.io/JS2PY/">https://xpdevs.github.io/JS2PY/</a>. This ensures proper recognition for the creators and the tool's development. Additionally, the copyright text must be clearly visible and readable to comply with the terms of use.</p>
             <p>Failure to meet these requirements may result in the revocation of the right to use JS2PY, and legal actions could be pursued. It is important that proper credit is provided to XPDevs and James Turner as outlined above to continue using the tool in accordance with the open-source license.</p>
             <p>JS2PY is hosted on the official XPDevs website and remains freely available to the public, continuing the open-source initiative led by XPDevs and James Turner.</p>
+            <br>
+            <p>Here is the code for you to also add for copyright information to show:</p>
+            <pre id="scriptCodeLegal"><code>&lt;script src="https://xpdevs.github.io/JS2PY/copyright/copyright.js"&gt;&lt;/script&gt;</code></pre>
+            
+            <!-- Copy Button -->
+            <button class="copy-btn" onclick="copyToClipboard('#scriptCodeLegal')">Copy Legal Info</button>
         </div>
 
         <div class="retro-box">
@@ -283,6 +289,18 @@ print(f"Hello, {name}!")
     </footer>
 
     <div id="modalContainer"></div>
+
+    <script>
+        function copyToClipboard(elementId) {
+            const element = document.querySelector(elementId);
+            const range = document.createRange();
+            range.selectNodeContents(element);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            document.execCommand('copy');
+        }
+    </script>
 
     <script src="src/script.js"></script>
 
