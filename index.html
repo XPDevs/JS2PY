@@ -21,9 +21,38 @@
             background-color: #333;
             color: #fff;
             padding: 20px;
-            text-align: center;
+            text-align: left;
             font-size: 24px;
             font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .header-buttons a {
+            background-color: white;
+            color: #0066cc;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-buttons a img {
+            width: 20px;
+            margin-right: 8px;
+        }
+
+        .header-buttons a:hover {
+            background-color: #f0f0f0;
         }
 
         .content {
@@ -179,10 +208,18 @@
 <body>
 
     <header>
-        JS2PY - JavaScript to Python Converter
+        <div>JS2PY - JavaScript to Python Converter</div>
+        <div class="header-buttons">
+            <a href="https://github.com/XPDevs/JS2PY" target="_blank">
+                <img src="image/github.jpg" alt="GitHub">GitHub
+            </a>
+            <a href="download/download.html" target="_blank">
+                <img src="image/download.jpg" alt="DOWNLOAD">Download Pre-Made
+            </a>
+        </div>
     </header>
 
-    <div class="content main-section">
+<div class="content main-section">
         <h2>Welcome to JS2PY!</h2>
         <p>JS2PY is a free tool that allows you to easily convert JavaScript code into Python. Simply add it to your project, and you’ll be able to seamlessly convert JavaScript into Python code.</p>
 
@@ -301,8 +338,7 @@ print(f"Hello, {name}!")
             document.execCommand('copy');
         }
     </script>
-    <script src="cursor/MOUSE.elf"></script>
-    <script src="src/script.js"></script>
 
 </body>
 </html>
+

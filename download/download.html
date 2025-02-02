@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You for Downloading</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 18px;
+            color: #555;
+        }
+        .back-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+        #countdown {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Thank you for downloading JS2PY! Pre-Made</h1>
+        <p>Your download is complete. We hope you enjoy using it.</p>
+        <p>You'll be redirected in <span id="countdown">5</span> seconds...</p>
+        <a href="../index.html" class="back-button">Go Back</a>
+    </div>
+
+    <script>
+        // Countdown timer
+        let countdown = 5;
+        const countdownElement = document.getElementById("countdown");
+        
+        const countdownInterval = setInterval(function() {
+            countdown--;
+            countdownElement.textContent = countdown;
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                downloadZIPFile(); // Trigger ZIP file download after countdown
+            }
+        }, 1000);
+
+        // Function to trigger the download of a ZIP file
+        function downloadZIPFile() {
+            const link = document.createElement('a');
+            link.setAttribute('download', 'JS2PY-Pre-Made.zip'); // Name of the downloaded ZIP file
+            link.setAttribute('href', 'Pre-Made.zip'); // Path to the ZIP file
+            link.click(); // Simulate a click to trigger the download
+        }
+    </script>
+</body>
+</html>
+
