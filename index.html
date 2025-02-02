@@ -85,16 +85,13 @@
             color: #0066cc;
             text-decoration: none;
         }
-       L {
-            color: #red;
-            text-decoration: none;
+
+        .legal-info {
+            background-color: #ff4d4d;
+            border: 1px solid #cc0000;
+            padding: 15px;
+            color: white;
         }
- .legal-info {
-        background-color: #ff4d4d; /* Red background for the legal section */
-        border: 1px solid #cc0000;
-        padding: 15px;
-        color: white; /* Ensure the text is visible on the red background */
-    }
 
         a:hover {
             text-decoration: underline;
@@ -132,6 +129,51 @@
         .instructions ul {
             font-size: 14px;
         }
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            z-index: 100;
+            top: 20px;
+            right: 20px;
+            width: 250px;
+            background-color: #fefefe;
+            border: 1px solid #888;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .modal.show {
+            display: block;
+            transform: translateX(0);
+        }
+
+        .modal.hide {
+            transform: translateX(100%);
+        }
+
+        .modal + .modal {
+            margin-top: 10px;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -148,7 +190,7 @@
             <button class="copy-btn" onclick="copyToClipboard('#scriptCode')">Copy</button>
             <h3>How to Integrate JS2PY into Your Project</h3>
             <p>To use JS2PY in your own web project, simply add the following line of code inside the <code>&lt;head&gt;</code> tag of your HTML document:</p>
-            <pre id="scriptCode"><code>&lt;script src="https://xpdevs.github.io/JS2PY/src/script.js"&gt;&lt;/script&gt;</code></pre>
+            <pre id="scriptCode"><code>&lt;script src="https://xpdevs.github.io/JS2PY/data/data.json"&gt;&lt;/script&gt;</code></pre>
         </div>
 
         <div class="retro-box">
@@ -207,14 +249,14 @@ button:hover {
 }
 &lt;/style&gt;</code></pre>
         </div>
-<div class="retro-box legal-info">
-    <h3>Legal information</h3>
-    <p>JS2PY is a free and open-source tool developed by XPDevs and James Turner that enables the full conversion of JavaScript code into Python. This tool provides developers with an easy way to translate JavaScript projects into Python, allowing for greater flexibility and compatibility between these two programming languages.</p>
-    <p>To use JS2PY, it is required to credit XPDevs and James Turner at the bottom of the project, along with a link to the official website: <a href="https://xpdevs.github.io/JS2PY/">https://xpdevs.github.io/JS2PY/</a>. This ensures proper recognition for the creators and the tool's development. Additionally, the copyright text must be clearly visible and readable to comply with the terms of use.</p>
-    <p>Failure to meet these requirements may result in the revocation of the right to use JS2PY, and legal actions could be pursued. It is important that proper credit is provided to XPDevs and James Turner as outlined above to continue using the tool in accordance with the open-source license.</p>
-    <p>JS2PY is hosted on the official XPDevs website and remains freely available to the public, continuing the open-source initiative led by XPDevs and James Turner.</p>
-</div>
 
+        <div class="retro-box legal-info">
+            <h3>Legal information</h3>
+            <p>JS2PY is a free and open-source tool developed by XPDevs and James Turner that enables the full conversion of JavaScript code into Python. This tool provides developers with an easy way to translate JavaScript projects into Python, allowing for greater flexibility and compatibility between these two programming languages.</p>
+            <p>To use JS2PY, it is required to credit XPDevs and James Turner at the bottom of the project, along with a link to the official website: <a href="https://xpdevs.github.io/JS2PY/">https://xpdevs.github.io/JS2PY/</a>. This ensures proper recognition for the creators and the tool's development. Additionally, the copyright text must be clearly visible and readable to comply with the terms of use.</p>
+            <p>Failure to meet these requirements may result in the revocation of the right to use JS2PY, and legal actions could be pursued. It is important that proper credit is provided to XPDevs and James Turner as outlined above to continue using the tool in accordance with the open-source license.</p>
+            <p>JS2PY is hosted on the official XPDevs website and remains freely available to the public, continuing the open-source initiative led by XPDevs and James Turner.</p>
+        </div>
 
         <div class="retro-box">
             <h3>Example Conversion</h3>
@@ -245,19 +287,10 @@ greet("World")
         <p>&copy; 2025 XPDevs. JS2PY - A Free, Simple Conversion Tool</p>
     </footer>
 
+    <div id="modalContainer"></div>
+
     <script>
-        function copyToClipboard(codeId) {
-            var codeElement = document.querySelector(codeId);
-            var range = document.createRange();
-            range.selectNode(codeElement);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand('copy');
-            window.getSelection().removeAllRanges();
-            alert("Code copied to clipboard!");
-        }
     </script>
 
 </body>
 </html>
-
