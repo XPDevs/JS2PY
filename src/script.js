@@ -1,15 +1,35 @@
-fetch('https://xpdevs.github.io/JS2PY/data/data.json')
-  .then(response => response.json())
-  .then(data => {
-    // Assuming the JSON file contains JavaScript code in a string format
-    const scriptContent = data.script;  // Adjust the key based on your JSON structure
+        function copyToClipboard(codeId) {
+            var codeElement = document.querySelector(codeId);
+            var range = document.createRange();
+            range.selectNode(codeElement);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
 
-    // Execute the script using eval() or new Function()
-    eval(scriptContent);
-    
-    // Alternatively: 
-    // new Function(scriptContent)();
-  })
-  .catch(error => {
-    console.error('Error loading JSON or executing script:', error);
-  });
+            // Create and show the modal
+            var modal = document.createElement("div");
+            modal.classList.add("modal", "show");
+            modal.innerHTML = `
+                <span class="close-btn">&times;</span>
+                <p>Code copied to clipboard!</p>
+            `;
+            document.getElementById("modalContainer").appendChild(modal);
+
+            // Auto-close the modal after 3 seconds
+            setTimeout(function() {
+                modal.classList.add("hide");
+                setTimeout(function() {
+                    modal.remove(); // Remove the modal completely after sliding out
+                }, 500); // Wait for the slide-out transition
+            }, 3000);
+
+            // Close the modal when the user clicks on the close button
+            var closeBtn = modal.querySelector(".close-btn");
+            closeBtn.onclick = function() {
+                modal.classList.add("hide");
+                setTimeout(function() {
+                    modal.remove(); // Remove the modal after it slides out
+                }, 500);
+            }
+        }
