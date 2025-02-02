@@ -262,18 +262,13 @@ button:hover {
             <h3>Example Conversion</h3>
             <p><strong>Example JavaScript:</strong></p>
             <pre>
-function greet(name) {
-    return "Hello, " + name + "!";
-}
-
-greet("World");
+const name = prompt("What's your name?");
+console.log(`Hello, ${name}!`);
             </pre>
             <p><strong>Converted Python:</strong></p>
             <pre>
-def greet(name):
-    return "Hello, " + name + "!"
-
-greet("World")
+name = input("What's your name? ")
+print(f"Hello, {name}!")
             </pre>
         </div>
 
